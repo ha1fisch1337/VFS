@@ -52,6 +52,7 @@ def input_handler(data):
         else:
             output_error("there is no such environment variable.")
     
+    
     elif data.split()[0] in cmds:
         if data.split()[0] in cmds[0:2]:
             output_messages(data)
