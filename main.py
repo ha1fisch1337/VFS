@@ -1,4 +1,5 @@
 from tkinter import *
+from time import sleep
 import os
 import subprocess
 import sys
@@ -17,7 +18,7 @@ def output_messages(msgs):
     output_field.insert(index = "0.0", chars = "Command: " + msgs.split()[0] + ";" + " parameters: " + ', '.join(msgs.split()[1::]) + "\n")
 
 def output_messages2(msgs):
-    output_field.insert(index = "0.0", chars = ' '.join(msgs) + "\n")
+    output_field.insert(index = "0.0", chars = ''.join(msgs) + "\n")
 
 def execute_command(cmd):
     return subprocess.check_output(cmd, text=True)
@@ -52,7 +53,7 @@ def input_handler(data):
         else:
             output_error("there is no such environment variable.")
     
-    
+
     elif data.split()[0] in cmds:
         if data.split()[0] in cmds[0:2]:
             output_messages(data)
@@ -89,13 +90,12 @@ def main():
         # output_messages2(sys.argv)
         for i in sys.argv:
             if "-p" in i:
-                path_to_vfs = i[2::]
+                path_to_vfs = i[2]
 
     elif any(["-s" in i for i in sys.argv]): # path to the script to be executed
-        output_messages2(sys.argv)
         for i in sys.argv:
             if "-s" in i:
-                path_to_script = i[2::]
+                path_to_script = sys.argv[2]
 
     if path_to_vfs:
         output_message("Path to the physical directory of VFS: " + path_to_vfs)
@@ -106,5 +106,5 @@ def main():
 
     root.mainloop()
 
-if __name__ == "__main__":
+if __name__ == "__main__": #2.3 остановочка
     main()
