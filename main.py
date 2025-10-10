@@ -3,9 +3,10 @@ from time import sleep
 import os
 import subprocess
 import sys
+from parser import VFSParser
 
 path_to_vfs, path_to_script = None, None
-cmds = ["ls", "cd", "printenv"]
+cmds = ["ls", "cd", "printenv", "vfs-info", "vfs-save", "whoami", "uptime"]
 input_data = ""
 
 def output_error(errm):
@@ -44,6 +45,8 @@ def parse_script():
             clear_input()
 
 def input_handler(data):
+    cmd = data.split()[0]
+    args = data.split()[1::]
     if data == "":
         output_error("no command entered.")
 
@@ -53,18 +56,30 @@ def input_handler(data):
         else:
             output_error("there is no such environment variable.")
     
-
-    elif data.split()[0] in cmds:
-        if data.split()[0] in cmds[0:2]:
-            output_messages(data)
+    elif cmd in cmds:
+        if cmd == "ls":
+            output_messages2(parser.vfs_ls())
+        elif cmd == "cd":
+            if parser.vfs_cd(args[0]):
+                output_messages2([f"successfully changed current directory to: {args[0]}"])
+            else:
+                output_messages2([f"error"])
+        elif cmd == "whoami":
+            output_messages2(execute_command("whoami"))
+        elif cmd == "uptime":
+            output_messages2(execute_command("uptime"))
+        elif cmd == "vfs-info": 
+            output_messages2(parser.vfs_info())
+        elif cmd == "vfs-save":
+            parser.vfs_save()
+            output_messages2([f"XML saved into saved_vfs.xml."])
         else:
-            output_messages2(execute_command(data.split()[0]))
+            output_messages2(execute_command(cmd))
             
-            
-    elif data.split()[0] == "exit":
-        root.destroy()
+    elif cmd == "exit":
+        root.quit()
 
-    elif data.split()[0] == "clear":
+    elif cmd == "clear":
         output_field.delete("0.0", "end")
 
     else:
@@ -86,11 +101,12 @@ output_field.grid(row=2, column=0)
 
 def main():
     global path_to_vfs, path_to_script
+    global parser
     if any(["-p" in i for i in sys.argv]): # path to the physical dir of VFS
         # output_messages2(sys.argv)
         for i in sys.argv:
             if "-p" in i:
-                path_to_vfs = i[2]
+                path_to_vfs = sys.argv[2]
 
     elif any(["-s" in i for i in sys.argv]): # path to the script to be executed
         for i in sys.argv:
@@ -99,6 +115,8 @@ def main():
 
     if path_to_vfs:
         output_message("Path to the physical directory of VFS: " + path_to_vfs)
+        parser = VFSParser()
+        parser.load_vfs(path_to_vfs)
 
     if path_to_script:
         output_message("Path to the script to be executed: " + path_to_script)
@@ -106,5 +124,5 @@ def main():
 
     root.mainloop()
 
-if __name__ == "__main__": #2.3 остановочка
+if __name__ == "__main__": 
     main()
