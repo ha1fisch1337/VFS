@@ -5,3 +5,4 @@ cd ..
 ls
 vfs-info
 vfs-save
+exit
