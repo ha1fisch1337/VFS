@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vfs name="sample_vfs">
+    <folder name="root">
+        <!-- Текстовые файлы -->
+        <file name="file1.txt" type="text">
+            <content>U2FtcGxlIHRleHQgZmlsZSBudW1iZXIgMQ==</content> <!-- "Sample text file number 1" -->
+        </file>
+        <file name="file2.txt" type="text">
+            <content>U2FtcGxlIHRleHQgZmlsZSBudW1iZXIgMg==</content> <!-- "Sample text file number 2" -->
+        </file>
+        <file name="file3.txt" type="text">
+            <content>U2FtcGxlIHRleHQgZmlsZSBudW1iZXIgMw==</content> <!-- "Sample text file number 3" -->
+        </file>
+
+        <!-- Бинарный файл (пример: пустой или с произвольными данными) -->
+        <file name="data.bin" type="binary">
+            <content>AAECBA==</content> <!-- Произвольные байты в Base64 -->
+        </file>
+    </folder>
+</vfs>

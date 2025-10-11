@@ -78,33 +78,27 @@ class VFSParser:
         if not self.vfs_data:
             return False
 
-        # Разбиваем путь на компоненты
         if path.startswith("/"):
-            # Абсолютный путь: начинаем с корня
             components = path.split("/")[1:]
             current_node = self.vfs_data
         else:
-            # Относительный путь: начинаем с текущей директории
             components = path.split("/")
             current_node = self._get_current_node()
 
-        # Обрабатываем компоненты пути
         for component in components:
             if not component or component == ".":
-                continue  # Пропускаем пустые компоненты и "."
+                continue
             if component == "..":
-                # Поднимаемся на уровень выше
                 if len(self.current_path) > 1:
                     self.current_path.pop()
                 current_node = self._get_current_node()
                 continue
 
-            # Проверяем, существует ли папка с именем component
             if component in current_node.get("folders", {}):
                 current_node = current_node["folders"][component]
                 self.current_path.append(component)
             else:
-                print(f"Ошибка: папка '{component}' не найдена.")
+                print(f"Error: folder '{component}' is not found.")
                 return False
 
         return True
@@ -152,7 +146,7 @@ class VFSParser:
 
     def _get_current_node(self) -> Dict[str, Any]:
         current_node = self.vfs_data
-        for folder in self.current_path[1:]:  # Пропускаем "root"
+        for folder in self.current_path[1:]:  
             current_node = current_node["folders"][folder]
         return current_node
 

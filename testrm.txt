@@ -1,0 +1,3 @@
+rm documents
+rm -r documents
+rm 

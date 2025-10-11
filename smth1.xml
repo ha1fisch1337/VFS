@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vfs name="minimal_vfs">
+    <folder name="root">
+        <file name="example.txt" type="text">
+            <content>SGVsbG8gVkZT</content>
+        </file>
+        <folder name="documents">
+            <file name="readme.txt" type="text">
+                <content>VGhpcyBpcyBhIHRlc3QgZmlsZS4=</content>
+            </file>
+        </folder>
+    </folder>
+</vfs>

@@ -1,0 +1,7 @@
+ls
+cd documents
+cd dadkaw;dkpawokdp
+cd ..
+ls
+vfs-info
+vfs-save

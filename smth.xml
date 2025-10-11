@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vfs name="example_vfs">
+    <!-- Корневая папка -->
+    <folder name="root">
+        <!-- Файл в корневой папке -->
+        <file name="readme.txt" type="text">
+            <content>VGhpcyBpcyBhIHNpbXBsZSB0ZXh0IGZpbGUu</content>
+        </file>
+
+        <!-- Вложенная папка -->
+        <folder name="documents">
+            <!-- Файл во вложенной папке -->
+            <file name="notes.txt" type="text">
+                <content>VGhpcyBpcyBhIHNpbXBsZSBub3RlIGZpbGUu</content>
+            </file>
+
+            <!-- Ещё одна вложенная папка -->
+            <folder name="projects">
+                <!-- Файл с двоичными данными -->
+                <file name="data.bin" type="binary">
+                    <content>AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=</content>
+                </file>
+            </folder>
+        </folder>
+    </folder>
+</vfs>
