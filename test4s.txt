@@ -3,3 +3,4 @@ cd documents
 whoami
 uptime
 cd ----
+exit
